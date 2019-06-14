@@ -100,9 +100,12 @@ void sendLineNotify(){
   }
 
   for (int i = 0; i < TOKENCOUNT; i++){
+      Serial.println("Send notify " + i);
       LINE.setToken(tokens[i]);
       LINE.notify("Someone at frontdoor");
+      if(ipCameraEnabled){
       LINE.notifyPicture("Camera snapshot", SPIFFS, "/snapshot.jpg");  
+      } 
 
   }
   
