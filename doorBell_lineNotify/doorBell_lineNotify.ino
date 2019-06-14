@@ -27,7 +27,7 @@ String tokens[TOKENCOUNT] = {"YOUR-LINE-TOKEN"};
 
 int ledPin = D0;
 int signalPin = D1;
-bool ipCameraEnabled = true;     //Use IP Camera or just send the message?
+bool ipCameraEnabled = false;     //Use IP Camera or just send the message?
 
 
 void downloadAndSaveFile(String fileName, String  url){
