@@ -94,19 +94,23 @@ void downloadAndSaveFile(String fileName, String  url){
 void sendLineNotify(){
   digitalWrite(D0,LOW);
 
+  
+
+  for (int i = 0; i < TOKENCOUNT; i++){
+      Serial.println("Send message " + i +1);
+      LINE.setToken(tokens[i]);
+      LINE.notify("Someone at frontdoor");
+  }
+
   if(ipCameraEnabled){
      downloadAndSaveFile("/snapshot.jpg","http://"+ IPCAM_IP +"/snapshot.cgi?user="+ IPCAM_USERNAME+"&pwd="+ IPCAM_PASSWORD);
     //listFiles();  
-  }
-
-  for (int i = 0; i < TOKENCOUNT; i++){
-      Serial.println("Send notify " + i);
+    for (int i = 0; i < TOKENCOUNT; i++){
+      Serial.println("Send image " + i +1);
       LINE.setToken(tokens[i]);
-      LINE.notify("Someone at frontdoor");
-      if(ipCameraEnabled){
       LINE.notifyPicture("Camera snapshot", SPIFFS, "/snapshot.jpg");  
-      } 
-
+      }
+    
   }
   
    digitalWrite(D0,HIGH);
